@@ -9,7 +9,7 @@ interface HeroGalleryProps {
 const HeroGallery = ({ looks, activeId, onSelect }: HeroGalleryProps) => {
   return (
     <div className="flex flex-col h-full">
-      <h2 className="category-label px-4 pt-6 pb-4">Collections</h2>
+      <h2 className="category-label px-4 pt-6 pb-4">Hero Product</h2>
       <div className="flex-1 overflow-y-auto scrollbar-thin px-4 pb-6 space-y-3">
         {looks.map((look) => {
           const isActive = look.id === activeId;
