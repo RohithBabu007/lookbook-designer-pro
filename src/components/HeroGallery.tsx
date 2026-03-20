@@ -30,8 +30,8 @@ const HeroGallery = ({ looks, activeId, onSelect }: HeroGalleryProps) => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-foreground/60 to-transparent p-3">
-                <span className="font-display text-sm tracking-wide text-primary-foreground">
-                  {look.title}
+                <span className="font-display text-sm tracking-wide text-primary-foreground block">
+                  {look.heroName || look.title}
                 </span>
               </div>
               {isActive && (
