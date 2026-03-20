@@ -1,13 +1,24 @@
-import hero1 from "@/assets/hero-1.jpg";
+import hero1 from "@/assets/hero-blazer.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
 import hero4 from "@/assets/hero-4.jpg";
-import formal1 from "@/assets/formal-1.jpg";
+
+import modelFormal from "@/assets/model-formal.jpg";
+import modelCasual from "@/assets/model-casual.jpg";
 import formal2 from "@/assets/formal-2.jpg";
 import formal3 from "@/assets/formal-3.jpg";
-import casual1 from "@/assets/casual-1.jpg";
 import casual2 from "@/assets/casual-2.jpg";
 import casual3 from "@/assets/casual-3.jpg";
+
+import itemTurtleneck from "@/assets/item-turtleneck.jpg";
+import itemSkirt from "@/assets/item-skirt.jpg";
+import itemLoafer from "@/assets/item-loafer.jpg";
+import itemHandbag from "@/assets/item-handbag.jpg";
+import itemTshirt from "@/assets/item-tshirt.jpg";
+import itemPants from "@/assets/item-pants.jpg";
+import itemSneakers from "@/assets/item-sneakers.jpg";
+import itemTote from "@/assets/item-tote.jpg";
+
 import accFormal1 from "@/assets/acc-formal-1.jpg";
 import accFormal2 from "@/assets/acc-formal-2.jpg";
 import accFormal3 from "@/assets/acc-formal-3.jpg";
@@ -20,8 +31,9 @@ import accCasual4 from "@/assets/acc-casual-4.jpg";
 export interface CompleteTheLookItem {
   image: string;
   label: string;
+  category: string; // e.g. "Top wear", "Bottom wear", "Footwear", "Accessory"
   sku: string;
-  matchingScore: number; // 0-100
+  matchingScore: number;
 }
 
 export interface OutfitCategory {
@@ -33,6 +45,7 @@ export interface OutfitCategory {
 export interface LookData {
   id: string;
   heroImage: string;
+  heroName: string;
   title: string;
   formal: OutfitCategory;
   casual: OutfitCategory;
@@ -40,102 +53,106 @@ export interface LookData {
 
 export const looks: LookData[] = [
   {
-    id: "noir-tailoring",
+    id: "dark-gray-blazer",
     heroImage: hero1,
-    title: "Noir Tailoring",
+    heroName: "LOFT Dark Gray Blazer",
+    title: "Dark Gray Blazer",
     formal: {
-      outfitImage: formal1,
-      caption: "Sharp silhouette in midnight black — boardroom to evening event",
+      outfitImage: modelFormal,
+      caption: "Women formal attire with dark blazer, turtleneck, skirt, shoes & accessories",
       completeTheLook: [
-        { image: accFormal1, label: "Structured Bag", sku: "FB-1001", matchingScore: 92 },
-        { image: accFormal2, label: "Gold Timepiece", sku: "FW-1002", matchingScore: 88 },
-        { image: accFormal3, label: "Oxford Shoes", sku: "FS-1003", matchingScore: 95 },
-        { image: accFormal4, label: "Silk Pocket Square", sku: "FP-1004", matchingScore: 84 },
+        { image: itemTurtleneck, label: "Turtleneck", category: "Top wear", sku: "TW-1001", matchingScore: 90 },
+        { image: itemSkirt, label: "Tailored Skirt", category: "Bottom wear", sku: "BW-1002", matchingScore: 98 },
+        { image: itemLoafer, label: "Loafer", category: "Footwear", sku: "FW-1003", matchingScore: 92 },
+        { image: itemHandbag, label: "Structured Handbag", category: "Accessory", sku: "AC-1004", matchingScore: 96 },
       ],
     },
     casual: {
-      outfitImage: casual1,
-      caption: "Relaxed weekend layers with understated edge",
+      outfitImage: modelCasual,
+      caption: "Relaxed casual look with denim jacket, white tee, chinos & sneakers",
       completeTheLook: [
-        { image: accCasual1, label: "Canvas Tote", sku: "CB-2001", matchingScore: 87 },
-        { image: accCasual2, label: "Tortoise Shades", sku: "CS-2002", matchingScore: 91 },
-        { image: accCasual3, label: "White Sneakers", sku: "CW-2003", matchingScore: 89 },
-        { image: accCasual4, label: "Woven Belt", sku: "CL-2004", matchingScore: 82 },
+        { image: itemTshirt, label: "White T-Shirt", category: "Top wear", sku: "CT-2001", matchingScore: 87 },
+        { image: itemPants, label: "Chino Pants", category: "Bottom wear", sku: "CB-2002", matchingScore: 91 },
+        { image: itemSneakers, label: "White Sneakers", category: "Footwear", sku: "CF-2003", matchingScore: 89 },
+        { image: itemTote, label: "Canvas Tote", category: "Accessory", sku: "CA-2004", matchingScore: 82 },
       ],
     },
   },
   {
     id: "ivory-silk",
     heroImage: hero2,
+    heroName: "Ivory Silk Blouse",
     title: "Ivory Silk",
     formal: {
       outfitImage: formal2,
-      caption: "Soft ivory draping for refined elegance",
+      caption: "Soft ivory draping for refined elegance with coordinated accessories",
       completeTheLook: [
-        { image: accFormal2, label: "Gold Timepiece", sku: "FW-1002", matchingScore: 90 },
-        { image: accFormal1, label: "Structured Bag", sku: "FB-1001", matchingScore: 86 },
-        { image: accFormal4, label: "Silk Pocket Square", sku: "FP-1004", matchingScore: 93 },
-        { image: accFormal3, label: "Oxford Shoes", sku: "FS-1003", matchingScore: 88 },
+        { image: accFormal2, label: "Gold Timepiece", category: "Accessory", sku: "FW-1002", matchingScore: 90 },
+        { image: accFormal1, label: "Structured Bag", category: "Accessory", sku: "FB-1001", matchingScore: 86 },
+        { image: accFormal4, label: "Silk Pocket Square", category: "Accessory", sku: "FP-1004", matchingScore: 93 },
+        { image: accFormal3, label: "Oxford Shoes", category: "Footwear", sku: "FS-1003", matchingScore: 88 },
       ],
     },
     casual: {
       outfitImage: casual2,
-      caption: "Light and breezy — effortless daytime style",
+      caption: "Light and breezy — effortless daytime style with summer essentials",
       completeTheLook: [
-        { image: accCasual2, label: "Tortoise Shades", sku: "CS-2002", matchingScore: 94 },
-        { image: accCasual1, label: "Canvas Tote", sku: "CB-2001", matchingScore: 85 },
-        { image: accCasual4, label: "Woven Belt", sku: "CL-2004", matchingScore: 79 },
-        { image: accCasual3, label: "White Sneakers", sku: "CW-2003", matchingScore: 91 },
+        { image: accCasual2, label: "Tortoise Shades", category: "Accessory", sku: "CS-2002", matchingScore: 94 },
+        { image: accCasual1, label: "Canvas Tote", category: "Accessory", sku: "CB-2001", matchingScore: 85 },
+        { image: accCasual4, label: "Woven Belt", category: "Accessory", sku: "CL-2004", matchingScore: 79 },
+        { image: accCasual3, label: "White Sneakers", category: "Footwear", sku: "CW-2003", matchingScore: 91 },
       ],
     },
   },
   {
     id: "rust-knit",
     heroImage: hero3,
+    heroName: "Rust Knit Cardigan",
     title: "Rust Knit",
     formal: {
       outfitImage: formal3,
-      caption: "Earthy tones with textured warmth — smart casual bridge",
+      caption: "Earthy tones with textured warmth — smart casual bridge with polish",
       completeTheLook: [
-        { image: accFormal1, label: "Structured Bag", sku: "FB-1001", matchingScore: 81 },
-        { image: accFormal3, label: "Oxford Shoes", sku: "FS-1003", matchingScore: 90 },
-        { image: accFormal2, label: "Gold Timepiece", sku: "FW-1002", matchingScore: 87 },
-        { image: accFormal4, label: "Silk Pocket Square", sku: "FP-1004", matchingScore: 76 },
+        { image: accFormal1, label: "Structured Bag", category: "Accessory", sku: "FB-1001", matchingScore: 81 },
+        { image: accFormal3, label: "Oxford Shoes", category: "Footwear", sku: "FS-1003", matchingScore: 90 },
+        { image: accFormal2, label: "Gold Timepiece", category: "Accessory", sku: "FW-1002", matchingScore: 87 },
+        { image: accFormal4, label: "Silk Pocket Square", category: "Accessory", sku: "FP-1004", matchingScore: 76 },
       ],
     },
     casual: {
       outfitImage: casual3,
-      caption: "Cozy layering for crisp autumn days",
+      caption: "Cozy layering for crisp autumn days with earthy accessories",
       completeTheLook: [
-        { image: accCasual1, label: "Canvas Tote", sku: "CB-2001", matchingScore: 83 },
-        { image: accCasual3, label: "White Sneakers", sku: "CW-2003", matchingScore: 92 },
-        { image: accCasual2, label: "Tortoise Shades", sku: "CS-2002", matchingScore: 78 },
-        { image: accCasual4, label: "Woven Belt", sku: "CL-2004", matchingScore: 88 },
+        { image: accCasual1, label: "Canvas Tote", category: "Accessory", sku: "CB-2001", matchingScore: 83 },
+        { image: accCasual3, label: "White Sneakers", category: "Footwear", sku: "CW-2003", matchingScore: 92 },
+        { image: accCasual2, label: "Tortoise Shades", category: "Accessory", sku: "CS-2002", matchingScore: 78 },
+        { image: accCasual4, label: "Woven Belt", category: "Accessory", sku: "CL-2004", matchingScore: 88 },
       ],
     },
   },
   {
     id: "navy-coat",
     heroImage: hero4,
+    heroName: "Navy Wool Coat",
     title: "Navy Coat",
     formal: {
-      outfitImage: formal1,
-      caption: "Classic navy layering — timeless power dressing",
+      outfitImage: modelFormal,
+      caption: "Classic navy layering — timeless power dressing with structured accessories",
       completeTheLook: [
-        { image: accFormal2, label: "Gold Timepiece", sku: "FW-1002", matchingScore: 94 },
-        { image: accFormal3, label: "Oxford Shoes", sku: "FS-1003", matchingScore: 91 },
-        { image: accFormal1, label: "Structured Bag", sku: "FB-1001", matchingScore: 85 },
-        { image: accFormal4, label: "Silk Pocket Square", sku: "FP-1004", matchingScore: 89 },
+        { image: accFormal2, label: "Gold Timepiece", category: "Accessory", sku: "FW-1002", matchingScore: 94 },
+        { image: accFormal3, label: "Oxford Shoes", category: "Footwear", sku: "FS-1003", matchingScore: 91 },
+        { image: accFormal1, label: "Structured Bag", category: "Accessory", sku: "FB-1001", matchingScore: 85 },
+        { image: accFormal4, label: "Silk Pocket Square", category: "Accessory", sku: "FP-1004", matchingScore: 89 },
       ],
     },
     casual: {
-      outfitImage: casual1,
-      caption: "Laid-back navy layers for everyday polish",
+      outfitImage: modelCasual,
+      caption: "Laid-back navy layers for everyday polish with casual accessories",
       completeTheLook: [
-        { image: accCasual2, label: "Tortoise Shades", sku: "CS-2002", matchingScore: 86 },
-        { image: accCasual4, label: "Woven Belt", sku: "CL-2004", matchingScore: 90 },
-        { image: accCasual1, label: "Canvas Tote", sku: "CB-2001", matchingScore: 80 },
-        { image: accCasual3, label: "White Sneakers", sku: "CW-2003", matchingScore: 93 },
+        { image: accCasual2, label: "Tortoise Shades", category: "Accessory", sku: "CS-2002", matchingScore: 86 },
+        { image: accCasual4, label: "Woven Belt", category: "Accessory", sku: "CL-2004", matchingScore: 90 },
+        { image: accCasual1, label: "Canvas Tote", category: "Accessory", sku: "CB-2001", matchingScore: 80 },
+        { image: accCasual3, label: "White Sneakers", category: "Footwear", sku: "CW-2003", matchingScore: 93 },
       ],
     },
   },
