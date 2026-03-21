@@ -1,4 +1,4 @@
-import hero1 from "@/assets/hero-blazer.jpg";
+import hero1 from "@/assets/real-blazer.jpg";
 import hero2 from "@/assets/hero-2.jpg";
 import hero3 from "@/assets/hero-3.jpg";
 import hero4 from "@/assets/hero-4.jpg";
@@ -10,10 +10,11 @@ import formal3 from "@/assets/formal-3.jpg";
 import casual2 from "@/assets/casual-2.jpg";
 import casual3 from "@/assets/casual-3.jpg";
 
-import itemTurtleneck from "@/assets/item-turtleneck.jpg";
-import itemSkirt from "@/assets/item-skirt.jpg";
-import itemLoafer from "@/assets/item-loafer.jpg";
-import itemHandbag from "@/assets/item-handbag.jpg";
+import realTurtleneck from "@/assets/real-turtleneck.jpg";
+import realSkirt from "@/assets/real-skirt.jpg";
+import realLoafer from "@/assets/real-loafer.jpg";
+import realHandbag from "@/assets/real-handbag.jpg";
+
 import itemTshirt from "@/assets/item-tshirt.jpg";
 import itemPants from "@/assets/item-pants.jpg";
 import itemSneakers from "@/assets/item-sneakers.jpg";
@@ -31,7 +32,7 @@ import accCasual4 from "@/assets/acc-casual-4.jpg";
 export interface CompleteTheLookItem {
   image: string;
   label: string;
-  category: string; // e.g. "Top wear", "Bottom wear", "Footwear", "Accessory"
+  category: string;
   sku: string;
   matchingScore: number;
 }
@@ -61,10 +62,10 @@ export const looks: LookData[] = [
       outfitImage: modelFormal,
       caption: "Women formal attire with dark blazer, turtleneck, skirt, shoes & accessories",
       completeTheLook: [
-        { image: itemTurtleneck, label: "Turtleneck", category: "Top wear", sku: "TW-1001", matchingScore: 90 },
-        { image: itemSkirt, label: "Tailored Skirt", category: "Bottom wear", sku: "BW-1002", matchingScore: 98 },
-        { image: itemLoafer, label: "Loafer", category: "Footwear", sku: "FW-1003", matchingScore: 92 },
-        { image: itemHandbag, label: "Structured Handbag", category: "Accessory", sku: "AC-1004", matchingScore: 96 },
+        { image: realTurtleneck, label: "Turtleneck", category: "Top wear", sku: "TW-1001", matchingScore: 90 },
+        { image: realSkirt, label: "Tailored Skirt", category: "Bottom wear", sku: "BW-1002", matchingScore: 98 },
+        { image: realLoafer, label: "Loafer", category: "Footwear", sku: "FW-1003", matchingScore: 92 },
+        { image: realHandbag, label: "Structured Handbag", category: "Accessory", sku: "AC-1004", matchingScore: 96 },
       ],
     },
     casual: {
