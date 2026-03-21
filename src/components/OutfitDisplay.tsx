@@ -86,14 +86,14 @@ const OutfitDisplay = ({ look }: OutfitDisplayProps) => {
         <img
           src={category.outfitImage}
           alt={`${type} outfit`}
-          className="w-full aspect-[16/9] object-cover object-top"
+          className="w-full aspect-[3/4] object-cover object-top"
         />
       </div>
       <p className="text-xs text-muted-foreground italic mb-4">{category.caption}</p>
 
       {/* Complete the Look grid */}
       <p className="category-label mb-2">Complete the Look</p>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-3">
         {category.completeTheLook.map((item) => (
           <div key={item.sku} className="group relative">
             {/* Checkbox */}
@@ -101,7 +101,7 @@ const OutfitDisplay = ({ look }: OutfitDisplayProps) => {
               <Checkbox
                 checked={!!checked[item.sku]}
                 onCheckedChange={() => toggle(item.sku)}
-                className="h-5 w-5 rounded-full bg-background/90 backdrop-blur-sm border-2 border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                className="h-5 w-5 rounded-sm bg-background/90 backdrop-blur-sm border-2 border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
               />
             </div>
 
