@@ -86,7 +86,7 @@ const OutfitDisplay = ({ look }: OutfitDisplayProps) => {
         <img
           src={category.outfitImage}
           alt={`${type} outfit`}
-          className="w-full aspect-[3/4] object-cover object-top"
+          className="w-full aspect-[2/3] object-cover object-center"
         />
       </div>
       <p className="text-xs text-muted-foreground italic mb-4">{category.caption}</p>
