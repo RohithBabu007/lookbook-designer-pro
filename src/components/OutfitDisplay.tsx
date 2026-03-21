@@ -60,102 +60,77 @@ const OutfitDisplay = ({ look }: OutfitDisplayProps) => {
   ) => (
     <div className="animate-fade-up" style={{ animationDelay: delay }}>
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="font-display text-xl lg:text-2xl font-light tracking-tight capitalize">
-          {type} — Complete the Look
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="font-display text-lg lg:text-xl font-light tracking-tight capitalize">
+          {type}
         </h2>
-        <button
-          onClick={() => handleAddToCart(type)}
-          disabled={!category.completeTheLook.some((i) => checked[i.sku])}
-          className="flex items-center gap-2 px-4 py-2 rounded-md text-xs font-medium tracking-wide transition-all duration-200 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed bg-foreground text-background hover:bg-foreground/90"
-        >
-          <ShoppingCart className="w-3.5 h-3.5" />
-          Add Cart
-          {category.completeTheLook.filter((i) => checked[i.sku]).length > 0 &&
-            ` (${category.completeTheLook.filter((i) => checked[i.sku]).length})`}
-        </button>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-muted-foreground">
+            Final Score: <ScoreBadge score={finalScore} />
+          </span>
+          <button
+            onClick={() => handleAddToCart(type)}
+            disabled={!category.completeTheLook.some((i) => checked[i.sku])}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium tracking-wide transition-all duration-200 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed bg-foreground text-background hover:bg-foreground/90"
+          >
+            <ShoppingCart className="w-3.5 h-3.5" />
+            Add Cart
+            {category.completeTheLook.filter((i) => checked[i.sku]).length > 0 &&
+              ` (${category.completeTheLook.filter((i) => checked[i.sku]).length})`}
+          </button>
+        </div>
       </div>
 
-      {/* 3-column: Hero | Items Grid | Model */}
-      <div className="grid grid-cols-1 md:grid-cols-[180px_1fr_200px] gap-4 lg:gap-6 items-start">
-        {/* Left: Hero product */}
-        <div className="hidden md:block">
-          <div className="rounded-md overflow-hidden ring-1 ring-border">
-            <img
-              src={look.heroImage}
-              alt={look.heroName}
-              className="w-full aspect-[3/4] object-cover"
-            />
-          </div>
-          <p className="mt-2 text-xs font-medium text-foreground">
-            Hero Product: {look.heroName}
-          </p>
-        </div>
+      {/* Model image */}
+      <div className="rounded-md overflow-hidden ring-1 ring-border mb-2">
+        <img
+          src={category.outfitImage}
+          alt={`${type} outfit`}
+          className="w-full aspect-[16/9] object-cover object-top"
+        />
+      </div>
+      <p className="text-xs text-muted-foreground italic mb-4">{category.caption}</p>
 
-        {/* Center: 2x2 items grid */}
-        <div>
-          <div className="grid grid-cols-2 gap-3">
-            {category.completeTheLook.map((item) => (
-              <div key={item.sku} className="group relative">
-                {/* Checkbox overlay */}
-                <div className="absolute top-2 right-2 z-10">
-                  <Checkbox
-                    checked={!!checked[item.sku]}
-                    onCheckedChange={() => toggle(item.sku)}
-                    className="h-5 w-5 rounded-full bg-background/90 backdrop-blur-sm border-2 border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-                  />
-                </div>
+      {/* Complete the Look grid */}
+      <p className="category-label mb-2">Complete the Look</p>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {category.completeTheLook.map((item) => (
+          <div key={item.sku} className="group relative">
+            {/* Checkbox */}
+            <div className="absolute top-2 right-2 z-10">
+              <Checkbox
+                checked={!!checked[item.sku]}
+                onCheckedChange={() => toggle(item.sku)}
+                className="h-5 w-5 rounded-full bg-background/90 backdrop-blur-sm border-2 border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+              />
+            </div>
 
-                <div className="rounded-md overflow-hidden ring-1 ring-border image-hover bg-muted/30">
-                  <img
-                    src={item.image}
-                    alt={item.label}
-                    className="w-full aspect-square object-cover"
-                  />
-                </div>
-                <div className="mt-2 space-y-0.5">
-                  <p className="text-xs font-semibold text-foreground">
-                    {item.category}: {item.label}
-                  </p>
-                  <p className="text-[0.65rem] text-muted-foreground font-mono">
-                    Sku Num: {item.sku}
-                  </p>
-                  <p className="text-[0.65rem] text-muted-foreground">
-                    Matching score: <span className="font-semibold text-foreground">{item.matchingScore}</span>
-                  </p>
-                </div>
-              </div>
-            ))}
+            <div className="rounded-md overflow-hidden ring-1 ring-border image-hover bg-muted/30">
+              <img
+                src={item.image}
+                alt={item.label}
+                className="w-full aspect-square object-cover"
+              />
+            </div>
+            <div className="mt-1.5 space-y-0.5">
+              <p className="text-xs font-semibold text-foreground">{item.label}</p>
+              <p className="text-[0.6rem] text-muted-foreground font-mono">SKU: {item.sku}</p>
+              <p className="text-[0.6rem] text-muted-foreground">
+                Match: <ScoreBadge score={item.matchingScore} />
+              </p>
+            </div>
           </div>
-        </div>
-
-        {/* Right: Model image with caption */}
-        <div>
-          <div className="rounded-md overflow-hidden ring-1 ring-border">
-            <img
-              src={category.outfitImage}
-              alt={`${type} outfit`}
-              className="w-full aspect-[2/3] object-cover"
-            />
-          </div>
-          <div className="mt-2 space-y-1">
-            <p className="text-xs text-muted-foreground italic leading-relaxed">
-              Caption: {category.caption}
-            </p>
-            <p className="text-xs font-medium text-foreground">
-              Score: <ScoreBadge score={finalScore} />
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 
   return (
-    <div className="h-full overflow-y-auto scrollbar-thin px-4 lg:px-6 py-6 space-y-10" key={look.id}>
-      {renderCategory("formal", look.formal, formalChecked, toggleFormal, formalFinalScore, "80ms")}
-      <hr className="border-border" />
-      {renderCategory("casual", look.casual, casualChecked, toggleCasual, casualFinalScore, "160ms")}
+    <div className="h-full overflow-y-auto scrollbar-thin px-4 lg:px-6 py-6 space-y-8" key={look.id}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {renderCategory("formal", look.formal, formalChecked, toggleFormal, formalFinalScore, "80ms")}
+        {renderCategory("casual", look.casual, casualChecked, toggleCasual, casualFinalScore, "160ms")}
+      </div>
     </div>
   );
 };
