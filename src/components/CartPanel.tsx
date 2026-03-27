@@ -1,26 +1,24 @@
 import { useCart } from "@/context/CartContext";
-import { X, Trash2, ShoppingBag } from "lucide-react";
+import { X, Trash2, ShoppingBag, Plus, Minus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const CartPanel = () => {
-  const { items, removeItem, clearCart, isOpen, setIsOpen } = useCart();
+  const { items, removeItem, updateQuantity, clearCart, isOpen, setIsOpen, totalItems, subtotal } = useCart();
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
-  const total = items.reduce((sum, i) => sum + i.price, 0);
-
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
 
-      {/* Panel */}
       <div className="relative w-full max-w-md bg-background border-l border-border h-full flex flex-col animate-fade-up" style={{ animationDirection: "normal" }}>
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
           <div className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5" />
             <h2 className="font-display text-lg font-medium tracking-tight">Your Cart</h2>
-            <span className="text-xs text-muted-foreground">({items.length} items)</span>
+            <span className="text-xs text-muted-foreground">({totalItems} items)</span>
           </div>
           <button onClick={() => setIsOpen(false)} className="p-1 rounded-md hover:bg-muted transition-colors">
             <X className="w-5 h-5" />
@@ -50,11 +48,31 @@ const CartPanel = () => {
                     </button>
                   </div>
                   <p className="text-[0.6rem] text-muted-foreground font-mono mt-0.5">SKU: {item.sku}</p>
-                  <p className="text-[0.6rem] text-muted-foreground">{item.category}</p>
                   {item.matchingScore && (
                     <p className="text-[0.6rem] text-muted-foreground">Match: {item.matchingScore}%</p>
                   )}
-                  <p className="text-sm font-semibold text-foreground mt-1">${item.price.toFixed(2)}</p>
+
+                  {/* Quantity controls */}
+                  <div className="flex items-center justify-between mt-2">
+                    <div className="flex items-center gap-1 ring-1 ring-border rounded-md">
+                      <button
+                        onClick={() => updateQuantity(item.sku, item.quantity - 1)}
+                        className="p-1 hover:bg-muted rounded-l-md transition-colors"
+                      >
+                        <Minus className="w-3 h-3" />
+                      </button>
+                      <span className="text-xs font-medium w-6 text-center">{item.quantity}</span>
+                      <button
+                        onClick={() => updateQuantity(item.sku, item.quantity + 1)}
+                        className="p-1 hover:bg-muted rounded-r-md transition-colors"
+                      >
+                        <Plus className="w-3 h-3" />
+                      </button>
+                    </div>
+                    <p className="text-sm font-semibold text-foreground">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))
@@ -66,10 +84,16 @@ const CartPanel = () => {
           <div className="border-t border-border px-5 py-4 space-y-3">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal</span>
-              <span className="font-semibold">${total.toFixed(2)}</span>
+              <span className="font-semibold">${subtotal.toFixed(2)}</span>
             </div>
-            <button className="w-full py-2.5 rounded-md bg-foreground text-background text-sm font-medium hover:bg-foreground/90 transition-colors">
-              Checkout
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                navigate("/checkout");
+              }}
+              className="w-full py-2.5 rounded-md bg-foreground text-background text-sm font-medium hover:bg-foreground/90 transition-colors"
+            >
+              Proceed to Checkout
             </button>
             <button onClick={clearCart} className="w-full py-2 rounded-md text-xs text-muted-foreground hover:text-destructive transition-colors">
               Clear Cart
