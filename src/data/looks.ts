@@ -35,6 +35,7 @@ export interface CompleteTheLookItem {
   category: string;
   sku: string;
   matchingScore: number;
+  price: number;
 }
 
 export interface OutfitCategory {
@@ -47,6 +48,8 @@ export interface LookData {
   id: string;
   heroImage: string;
   heroName: string;
+  heroPrice: number;
+  heroSku: string;
   title: string;
   formal: OutfitCategory;
   casual: OutfitCategory;
